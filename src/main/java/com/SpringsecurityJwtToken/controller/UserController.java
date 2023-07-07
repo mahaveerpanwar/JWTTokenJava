@@ -49,6 +49,6 @@ public class UserController {
 
 	@PostMapping("/welcome")
 	public ResponseEntity<String> accessData(Principal p) {
-		return ResponseEntity.ok("Hello");
+		return ResponseEntity.ok("Hello"+ p.getName());
 	}
 }

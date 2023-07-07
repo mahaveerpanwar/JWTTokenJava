@@ -38,7 +38,7 @@ public class UserserviceImpl implements Userservice, UserDetailsService {
 		Optional<User> opt = findByUsername(username);
 		User user = opt.get();
 		if (user == null) {
-			throw new UsernameNotFoundException("User NOt exist");
+			throw new UsernameNotFoundException("User Not exist");
 		}
 		return new org.springframework.security.core.userdetails.User(username, user.getPassword(),
 				user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role)).collect(Collectors.toList()));

@@ -13,13 +13,20 @@ public class JWTUtil {
 
 	@Value("${app.secret}")
 	private String secret;
+	
+	@Value("${app.privateKey}")
+    private String privateKey;
+	
 
 	public String generatetoken(String subject) {
 
 		return Jwts.builder().setSubject(subject).setIssuer("mahaveer")
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(15)))
-				.signWith(SignatureAlgorithm.HS512, secret.getBytes()).compact();
+//				.signWith(SignatureAlgorithm.RS256, secret.getBytes())
+				.signWith(SignatureAlgorithm.RS512, privateKey)
+				.compact();
+		
 	}
 
 	public Claims getClaims(String token) {
